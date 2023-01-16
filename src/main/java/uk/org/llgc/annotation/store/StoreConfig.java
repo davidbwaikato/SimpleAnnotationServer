@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import uk.org.llgc.annotation.store.adapters.StoreAdapter;
 import uk.org.llgc.annotation.store.adapters.rdf.jena.JenaStore;
+import uk.org.llgc.annotation.store.adapters.rdf.jena.FusekiStore;
 import uk.org.llgc.annotation.store.adapters.rdf.sesame.SesameStore;
 import uk.org.llgc.annotation.store.adapters.solr.SolrStore;
 import uk.org.llgc.annotation.store.adapters.elastic.ElasticStore;
@@ -157,7 +158,13 @@ public class StoreConfig extends HttpServlet {
 		String tStore = _props.get("store");
 
 		if (tStore.equals("jena")) {
-			tAdapter = new JenaStore(_annotationUtils, _props.get("data_dir"));
+		    String tDataDir = _props.get("data_dir");
+		    if (tDataDir != null && tDataDir.trim().length() != 0) {
+			tAdapter = new JenaStore(_annotationUtils, tDataDir);
+		    }
+		    else {
+			tAdapter = new FusekiStore(_annotationUtils, _props.get("repo_url"));
+		    }
 		} else if (tStore.equals("sesame")) {
 			tAdapter = new SesameStore(_annotationUtils, _props.get("repo_url"));
 		} else if (tStore.equals("solr") || tStore.equals("solr-cloud")) {
