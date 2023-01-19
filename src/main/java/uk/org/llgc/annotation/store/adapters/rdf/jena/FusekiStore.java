@@ -239,11 +239,12 @@ public class FusekiStore extends AbstractRDFStore implements StoreAdapter {
 
     public static void main(String[] args) {
 
+	// **** Text case for example built as part of the InterMusE project
 	String pRepositoryURL = "https://intermuse.sowemustthink.space/greenstone3-lod3/";
 	String jsonld_ifilename = "/tmp/openannotation-list.json";
-	String at_id = "http-greenstone://intermuse/programmes-and-performers/HASH012cd965c3e83d504f4a78cd/openannotation-list.json";
+	String at_id = "http://ld.greenstone.org/intermuse/programmes-and-performers/HASH012cd965c3e83d504f4a78cd/openannotation-list.json";
 
-	String pContext = "http-greenstone://intermuse/programmes-and-performers/HASH012cd965c3e83d504f4a78cd/annotation/gv-block-1";
+	String pContext = "http://ld.greenstone.org/intermuse/programmes-and-performers/HASH012cd965c3e83d504f4a78cd/annotation/gv-block-1";
 	
 	RDFConnection conn = RDFConnectionFuseki.newBuilder()
 	    //.queryEndpoint(pRepositoryURL+"greenstone/query")

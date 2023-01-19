@@ -37,7 +37,9 @@ public class RDFManifest extends Manifest {
 
     protected void setupManifest(final Model pModel) {
         _manifest = pModel;
-        pModel.begin();
+	if (pModel.supportsTransactions()) {
+	    pModel.begin();
+	}
         // set uri
         // should maybe use type = Manifest for this:
         Iterator tSubjects = _manifest.listSubjectsWithProperty(DC.identifier);
@@ -74,8 +76,10 @@ public class RDFManifest extends Manifest {
                 _canvases.add(new Canvas(tCanvasURI.getURI(), tLabel.getString()));
             }
         }
-
-        pModel.commit();
+		
+	if (pModel.supportsTransactions()) {
+	    pModel.commit();
+	}
     }
 
     public void setModel(final Model pModel) {
